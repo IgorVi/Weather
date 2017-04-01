@@ -1,0 +1,147 @@
+﻿<UserControl x:Class="Weather.Controls.Forecast"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Weather.Controls"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d"
+             MinHeight="520" MinWidth="1100">
+    <!--Source="http://api.openweathermap.org/data/2.5/forecast/daily?lat=49.5883&amp;lon=34.5514&amp;cnt=7&amp;appid=8ebc91462ca4ef611d4fe64c7a674709&amp;mode=xml&amp;units=metric"-->
+    <!--Source="http://api.openweathermap.org/data/2.5/forecast/daily?lat=%22+latitude+%22&amp;lon=%22+longtitude+%22&amp;cnt=7&amp;appid=8ebc91462ca4ef611d4fe64c7a674709&amp;mode=xml&amp;units=metric"-->
+    <UserControl.Resources>
+        <XmlDataProvider x:Key="weatherProvider" XPath="/weatherdata/forecast/time" DataChanged="XmlDataProvider_DataChanged" Source="http://api.openweathermap.org/data/2.5/forecast/daily?lat=37.42667&amp;lon=37.688999&amp;cnt=7&amp;appid=8ebc91462ca4ef611d4fe64c7a674709&amp;mode=xml&amp;units=metric"/>
+        <local:ImagePachConverter x:Key="ImgConverter"/>
+        <local:DataConverter x:Key="dateConverter"/>
+        <local:TemperatureConverter x:Key="temperatureConverter"/>
+        <local:TimeConverter x:Key="timeConverter"/>
+    </UserControl.Resources>
+    <UserControl.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFEEEE11" Offset="0"/>
+            <GradientStop Color="#FF1D14E2" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Background>
+    <Grid DataContext="{Binding Source={StaticResource weatherProvider}}">
+        <StackPanel Margin="10">
+            <StackPanel Grid.Row="0" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="FontSize" Value="24"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <TextBlock Text="{Binding XPath=../../location/name}"/>
+                    <TextBlock Text="{Binding XPath=../../location/country, StringFormat='  \{0\}'}"/>
+                </StackPanel>
+                <Image Source="{Binding Converter={StaticResource ImgConverter}, XPath=../time[1]/symbol/@var}" Width="60"/>
+                <TextBlock Text="{Binding XPath=../time[1]/symbol/@name}" TextAlignment="Center" FontSize="22"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding XPath=../../sun/@rise, Converter={StaticResource timeConverter}, StringFormat='Sunrise 🔆  \{0\}'}"/>
+                    <TextBlock Text="{Binding XPath=../../sun/@set, Converter={StaticResource timeConverter}, StringFormat='    Sunset ☀  \{0\}'}"/>
+                </StackPanel>
+                <TextBlock Name="txtUpdate" Text="" TextAlignment="Center"/>
+            </StackPanel>
+            <ListBox Name="listBoxForecast" Grid.Row="1" ItemsSource="{Binding}" VerticalAlignment="Top" BorderThickness="0" Background="Transparent" Margin="0 10" SelectedIndex="0">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Hidden"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="5" Margin="1 10" Padding="5 3">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding XPath=./@day, Converter={StaticResource dateConverter}}" FontSize="20" FontWeight="Bold" Foreground="Blue" TextAlignment="Center"/>
+                                <Image Source="{Binding Converter={StaticResource ImgConverter}, XPath=symbol/@var}" Width="40"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="{x:Type Label}">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="FontSize" Value="16"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <Label Content="{Binding XPath=temperature/@min, Converter={StaticResource temperatureConverter}
+                                    }" Foreground="Black"/>
+                                    <Label Content="{Binding XPath=temperature/@max, Converter={StaticResource temperatureConverter}}" Foreground="White"/>
+                                </StackPanel>
+                                <Label Content="{Binding XPath=symbol/@name}" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid Grid.Row="2" DataContext="{Binding SelectedItem, ElementName=listBoxForecast}" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style x:Key="hederText">
+                        <Setter Property="Control.Foreground" Value="Black"/>
+                        <Setter Property="Control.FontWeight" Value="Bold"/>
+                        <Setter Property="Control.FontSize" Value="18"/>
+                        <Setter Property="TextBlock.TextAlignment" Value="Right"/>
+                    </Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Control.FontSize" Value="18"/>
+                        <Setter Property="Control.Foreground" Value="Yellow"/>
+                    </Style>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Setter Property="Orientation" Value="Horizontal"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                    </Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Foreground" Value="Gold"/>
+                    </Style>
+                </Grid.Resources>
+                <TextBlock Text="Temperature:" Style="{StaticResource hederText}"/>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="  night:"/>
+                    <Label Content="{Binding Converter={StaticResource temperatureConverter}, StringFormat='  \{0\}  ', XPath=temperature/@night}"/>
+                    <TextBlock Text="morning:"/>
+                    <Label Content="{Binding Converter={StaticResource temperatureConverter}, StringFormat='  \{0\}  ', XPath=temperature/@morn}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="1">
+                    <TextBlock Text="  day:"/>
+                    <Label Content="{Binding Converter={StaticResource temperatureConverter}, StringFormat='  \{0\}  ', XPath=temperature/@day}"/>
+                    <TextBlock Text="evening:"/>
+                    <Label Content="{Binding Converter={StaticResource temperatureConverter}, StringFormat='  \{0\}  ', XPath=temperature/@eve}"/>
+                </StackPanel>
+                <TextBlock Grid.Row="2" Text="Wind direction:" Style="{StaticResource hederText}"/>
+                <StackPanel Grid.Column="1" Grid.Row="2">
+                    <TextBlock Text="{Binding StringFormat='  \{0\}  ', XPath=windDirection/@name}"/>
+                    <TextBlock Text="⤋" RenderTransformOrigin="0.5, 0.5">
+                        <TextBlock.RenderTransform>
+                            <RotateTransform Angle="{Binding XPath=windDirection/@deg}"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </StackPanel>
+                <TextBlock Grid.Row="3" Text="Wind speed:" Style="{StaticResource hederText}"/>
+                <StackPanel Grid.Column="1" Grid.Row="3">
+                    <TextBlock Text="{Binding StringFormat='  \{0\} m/s', XPath=windSpeed/@mps}"/>
+                    <TextBlock Text="{Binding StringFormat='  \{0\}', XPath=windSpeed/@name}"/>
+                </StackPanel>
+                <TextBlock Grid.Row="4" Text="Humidity:" Style="{StaticResource hederText}"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding StringFormat='  \{0\} %', XPath=humidity/@value}"/>
+                <TextBlock Grid.Row="5" Text="Pressure:" Style="{StaticResource hederText}"/>
+                <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding StringFormat='  \{0\} hPa', XPath=pressure/@value}"/>
+                <TextBlock Grid.Row="6" Text="Clouds:" Style="{StaticResource hederText}"/>
+                <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding StringFormat='  \{0\} %', XPath=clouds/@all}"/>
+            </Grid>
+        </StackPanel>
+        <Border Name="darkBackground" Background="#CC000000" Visibility="Collapsed">
+            <TextBlock Text="Loading..." FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+        </Border>
+    </Grid>
+</UserControl>

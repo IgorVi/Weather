@@ -1,0 +1,88 @@
+﻿<weatherdata>
+  <location>
+    <name>Araban</name>
+    <type></type>
+    <country>TR</country>
+    <timezone></timezone>
+    <location altitude="0" latitude="37.42667" longitude="37.688999" geobase="geonames" geobaseid="323750"></location>
+  </location>
+  <credit></credit>
+  <meta>
+    <lastupdate></lastupdate>
+    <calctime>0.0272</calctime>
+    <nextupdate></nextupdate>
+  </meta>
+  <sun rise="2016-11-25T04:20:01" set="2016-11-25T14:12:50"></sun>
+  <forecast>
+    <time day="2016-11-25">
+      <symbol number="800" name="clear sky" var="01n"></symbol>
+      <precipitation></precipitation>
+      <windDirection deg="142" code="SE" name="SouthEast"></windDirection>
+      <windSpeed mps="1.06" name="Calm"></windSpeed>
+      <temperature day="4.59" min="-5.24" max="4.59" night="-5.24" eve="4.59" morn="4.59"></temperature>
+      <pressure unit="hPa" value="958.58"></pressure>
+      <humidity value="32" unit="%"></humidity>
+      <clouds value="clear sky" all="0" unit="%"></clouds>
+    </time>
+    <time day="2016-11-26">
+      <symbol number="800" name="clear sky" var="01d"></symbol>
+      <precipitation></precipitation>
+      <windDirection deg="40" code="NE" name="NorthEast"></windDirection>
+      <windSpeed mps="1.75" name="Light breeze"></windSpeed>
+      <temperature day="11.72" min="-7.51" max="13.35" night="-7.06" eve="1.75" morn="-7.51"></temperature>
+      <pressure unit="hPa" value="960.05"></pressure>
+      <humidity value="28" unit="%"></humidity>
+      <clouds value="clear sky" all="0" unit="%"></clouds>
+    </time>
+    <time day="2016-11-27">
+      <symbol number="800" name="clear sky" var="01d"></symbol>
+      <precipitation></precipitation>
+      <windDirection deg="51" code="NE" name="NorthEast"></windDirection>
+      <windSpeed mps="1.82" name="Light breeze"></windSpeed>
+      <temperature day="10.7" min="-8.37" max="12.4" night="-7.8" eve="1.18" morn="-8.37"></temperature>
+      <pressure unit="hPa" value="961.58"></pressure>
+      <humidity value="34" unit="%"></humidity>
+      <clouds value="clear sky" all="0" unit="%"></clouds>
+    </time>
+    <time day="2016-11-28">
+      <symbol number="801" name="few clouds" var="02d"></symbol>
+      <precipitation></precipitation>
+      <windDirection deg="59" code="ENE" name="East-northeast"></windDirection>
+      <windSpeed mps="2.21" name="Light breeze"></windSpeed>
+      <temperature day="10.16" min="-8.95" max="11.34" night="-2.33" eve="3.19" morn="-8.95"></temperature>
+      <pressure unit="hPa" value="961.33"></pressure>
+      <humidity value="32" unit="%"></humidity>
+      <clouds value="few clouds" all="24" unit="%"></clouds>
+    </time>
+    <time day="2016-11-29">
+      <symbol number="500" name="light rain" var="10d"></symbol>
+      <precipitation value="1.82" type="rain"></precipitation>
+      <windDirection deg="98" code="E" name="East"></windDirection>
+      <windSpeed mps="4.2" name="Gentle Breeze"></windSpeed>
+      <temperature day="11.18" min="5.23" max="11.18" night="5.23" eve="6.23" morn="6.29"></temperature>
+      <pressure unit="hPa" value="958.34"></pressure>
+      <humidity value="0" unit="%"></humidity>
+      <clouds value="broken clouds" all="81" unit="%"></clouds>
+    </time>
+    <time day="2016-11-30">
+      <symbol number="800" name="clear sky" var="01d"></symbol>
+      <precipitation value="5.54" type="rain"></precipitation>
+      <windDirection deg="47" code="NE" name="NorthEast"></windDirection>
+      <windSpeed mps="2.03" name="Light breeze"></windSpeed>
+      <temperature day="7.33" min="2.61" max="7.33" night="2.61" eve="5.31" morn="5.92"></temperature>
+      <pressure unit="hPa" value="953.81"></pressure>
+      <humidity value="0" unit="%"></humidity>
+      <clouds value="overcast clouds" all="97" unit="%"></clouds>
+    </time>
+    <time day="2016-12-01">
+      <symbol number="800" name="clear sky" var="01d"></symbol>
+      <precipitation></precipitation>
+      <windDirection deg="350" code="" name=""></windDirection>
+      <windSpeed mps="2.47" name="Light breeze"></windSpeed>
+      <temperature day="9.66" min="-2.17" max="9.66" night="-1.02" eve="-2.17" morn="1"></temperature>
+      <pressure unit="hPa" value="954.17"></pressure>
+      <humidity value="0" unit="%"></humidity>
+      <clouds value="clear sky" all="0" unit="%"></clouds>
+    </time>
+  </forecast>
+</weatherdata>
